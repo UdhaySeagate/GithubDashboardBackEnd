@@ -1,0 +1,36 @@
+http:
+  port: 8080
+  host: ssc-vm-1018.colo.seagate.com
+apiEndpoints:
+  filters:
+    host: ssc-vm-1018.colo.seagate.com
+    paths: '/rest/filters/*'
+    methods: ["GET"]
+  storypoints:
+    host: ssc-vm-1018.colo.seagate.com
+    paths: '/rest/cards/*'
+    methods: ["GET"]
+serviceEndpoints:
+  github:
+    url: 'http://ssc-vm-1018.colo.seagate.com:9090'
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  default:
+    apiEndpoints:
+      - filters
+      - cards
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: github
+              changeOrigin: false

@@ -1,0 +1,10 @@
+{
+    "exclude": [
+        "helpers/*",
+        "models/*",
+        "schema/*",
+        "gateway/*",
+        "swagger/*",
+        "constants/*"
+    ]
+}
